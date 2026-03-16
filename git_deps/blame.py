@@ -37,6 +37,9 @@ def blame_via_subprocess(path, commit, start_line, num_lines):
         '-L', "%d,+%d" % (start_line, num_lines),
         commit, '--', path
     ]
+
+    if start_line <= 0 or num_lines <= 0: return
+    
     output = subprocess.check_output(cmd, universal_newlines=True)
 
     current_hunk = None
